@@ -1,0 +1,12 @@
+div {
+  justify-content: center;
+}
+.heading {
+  display: block;
+  height: 30vh;
+  background-color: gray;
+}
+
+.container {
+  margin: 5vh auto;
+}
