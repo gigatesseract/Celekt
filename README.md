@@ -9,3 +9,5 @@ Uses deep metric learning instead of deep learning for face identificaton.
 2. Run flask server
 3. Run index.html
 4. Can recognise all faces mentioned in the dataset, in a wide variety of angles and backgrounds
+
+dataset accumulated using [my image scraping tool](https://github.com/gigatesseract/GImageScrape)
