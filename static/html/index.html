@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Poor man's Rekog</title>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
 
     <link
       rel="stylesheet"
@@ -26,34 +31,90 @@
     />
     <link rel="stylesheet" href="../css/index.css" />
   </head>
+
   <body>
-    <div class="heading">&nbsp;</div>
+    <script src="../js/index.js"></script>
+
+    <div class="heading">&nbsp;
+        <div class="aws">Poor Man's Rekognition</div>
+       
+     
+    </div>
+ 
+          <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Poor Man's Rekognition</a>
+          </div>
+      
+       
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Photo</a></li>
+              <li><a href="#">Video feed</a></li>
+            </ul>
+            </div>
+            </nav>
+            <div class="body">
+  
+
+            <div id="photo">      
     <div class="main-container">
       <div class="container">
-        <form method="POST" enctype="multipart/form-data" id="image-form">
+        <form
+          method="POST"
+          enctype="multipart/form-data"
+          id="image-form"
+          class="form-inline"
+        >
           <div class="form-group">
-            <label for="exampleInputEmail1">Upload a file:</label>
             <input
               type="file"
-              class="form-control-file"
+              onchange="readURL(this);"
+              class="d-inline"
               id="image"
               aria-describedby="image"
               name="image"
+              required
             />
           </div>
+
           <button type="submit" class="btn btn-primary">Submit</button>
+          <a href="" class="d-inline" download="filename.jpg" id="download-link">Download</a>
+     
         </form>
+        
+       
       </div>
-      <div id="image-render">
-        <!-- <img src="" alt="decoded image here" id="img-render" /> -->
+
+      <div id="image-render" class="d-inline">
+        <img
+          id="image-render-before"
+          height="300"
+          width="400"
+          src="../preview.png"
+        />
+        <p>After FACE RECOG</p>
+        <img
+          id="image-render-after"
+          height="300"
+          width="400"
+          src="../preview.png"
+        />
+ 
       </div>
     </div>
-  </body>
+    </div>
+    <div id=video-feed>
+      <p>Under construciton</p>
+    </div>
+    </div>
 
-  <script
-    src="http://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"
-  ></script>
-  <script src="../js/index.js"></script>
+  </body>
 </html>

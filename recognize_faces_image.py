@@ -67,8 +67,8 @@ def recognise_faces(encoding_file, image, detection_method="hog"):
         )
 
     jpg, b = cv2.imencode(".jpg", image)
-    cv2.imwrite("111.jpg", image)
-    with open("111.jpg", "rb") as image_file:
+    cv2.imwrite("static/images/temp.jpg", image)
+    with open("static/images/temp.jpg", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
     return encoded_string
 
