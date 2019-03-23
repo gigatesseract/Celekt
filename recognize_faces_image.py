@@ -51,8 +51,14 @@ def recognise_faces(encoding_file, image, detection_method="hog"):
             # determine the recognized face with the largest number of
             # votes (note: in the event of an unlikely tie Python will
             # select first entry in the dictionary)
-
-            name = max(counts, key=counts.get)
+            names_dict = names_dict.most_common(3)
+            name_dict = Counter()
+            for (key, value) in names_dict:
+                name_dict[key] = value
+            total_sum = sum(name_dict.values())
+            for key in name_dict:
+                name_dict[key] = name_dict[key] / total_sum
+            print(name_dict)
 
         # update the list of names
         names.append(name)
