@@ -87,6 +87,7 @@ celerybeat-schedule
 env/
 venv/
 ENV/
+emv/
 env.bak/
 venv.bak/
 
@@ -102,3 +103,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+#dataset
+dataset/

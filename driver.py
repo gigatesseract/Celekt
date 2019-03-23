@@ -18,21 +18,20 @@ api = Api(app)
 
 class recImage(Resource):
     def post(self):
-        
-        image = request.files["image"]
-        img_string = rec_image.recognise_faces("encodings.pickle", image)
-        response = jsonify({"key": img_string.decode("utf-8")})
-      
 
-            # return (
-            #     send_from_directory(
-            #         "static/images/",
-            #         "temp.jpg",
-            #         as_attachment=True,
-            #         mimetype="image/jpg",
-            #         attachment_filename="temp.jpg",
-            #     ),
-            # )
+        image = request.files["image"]
+        (img_string, dict) = rec_image.recognise_faces("enc.pickle", image)
+        response = jsonify({"key": img_string.decode("utf-8"), "dict": dict})
+
+        # return (
+        #     send_from_directory(
+        #         "static/images/",
+        #         "temp.jpg",
+        #         as_attachment=True,
+        #         mimetype="image/jpg",
+        #         attachment_filename="temp.jpg",
+        #     ),
+        # )
         return response
 
 

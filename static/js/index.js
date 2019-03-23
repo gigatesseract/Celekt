@@ -65,21 +65,20 @@ $(function() {
       data: form_data,
       cache: false,
       success: function(result) {
-        // $("#image-render").text(result.key);
+        console.log(result.dict);
+        // dict = result.dict;
+        // dict.forEach(ele => {
+        //   var total_count = 0;
+        //   ele.forEach();
+        // });
         base64 = result.key;
-        // // console.log(base64);
+
         var img = document.getElementById("image-render-after");
         img.src = "data:image/jpg;base64," + base64;
         img.width = 400;
         img.height = 300;
         console.log("success");
         document.getElementById("download-link").href = img.src;
-
-        // while (render.children.length > 1)
-        //   render.removeChild(render.children[1]);
-        // console.log(render.children);
-
-        // document.getElementById("image-render").appendChild(img);
       },
       error: function(error) {
         console.log(error);

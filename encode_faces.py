@@ -10,14 +10,15 @@ def encode(dataset_path, encoding_file, detection_method="hog"):
 
     # grab the paths to the input images in our dataset
     print("[INFO] quantifying faces...")
-    imagePaths = list(paths.list_images(dataset))
+    imagePaths = list(paths.list_images(dataset_path))
     knownEncodings = []
     knownNames = []
 
     # loop over the image paths
     for (i, imagePath) in enumerate(imagePaths):
         # extract the person name from the image path
-        print("[INFO] processing image {}/{}".format(i + 1, len(imagePaths)))
+        if i % 2000 == 0:
+            print("[INFO] processing image {}/{}".format(i + 1, len(imagePaths)))
         name = imagePath.split(os.path.sep)[-2]
 
         # load the input image and convert it from RGB (OpenCV ordering)
@@ -46,4 +47,9 @@ def encode(dataset_path, encoding_file, detection_method="hog"):
     f.write(pickle.dumps(data))
     print("pickle file generated")
     f.close()
+
+
+if __name__ == "__main__":
+    filename = "encodings2.pickle"
+    encode("dataset/", filename)
 
