@@ -20,7 +20,7 @@ class recImage(Resource):
     def post(self):
 
         image = request.files["image"]
-        (img_string, dict) = rec_image.recognise_faces("enc.pickle", image)
+        (img_string, dict) = rec_image.recognise_faces("encodings2.pickle", image)
         response = jsonify({"key": img_string.decode("utf-8"), "dict": dict})
 
         # return (

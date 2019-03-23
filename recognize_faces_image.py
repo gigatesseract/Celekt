@@ -6,6 +6,7 @@ import numpy
 from flask import request
 from werkzeug.wrappers import Response
 import base64
+from collections import Counter
 
 
 def recognise_faces(encoding_file, image, detection_method="hog"):
@@ -25,6 +26,7 @@ def recognise_faces(encoding_file, image, detection_method="hog"):
 
     # initialize the list of names for each face detected
     names = []
+    counter_dict = []
 
     # loop over the facial embeddings
     for encoding in encodings:
@@ -40,11 +42,13 @@ def recognise_faces(encoding_file, image, detection_method="hog"):
             # was matched
             matchedIdxs = [i for (i, b) in enumerate(matches) if b]
             counts = {}
+            names_dict = Counter()
 
             # loop over the matched indexes and maintain a count for
             # each recognized face face
             for i in matchedIdxs:
                 name = data["names"][i]
+                names_dict[name] += 1
                 counts[name] = counts.get(name, 0) + 1
                 print(name)
 
@@ -59,9 +63,10 @@ def recognise_faces(encoding_file, image, detection_method="hog"):
             for key in name_dict:
                 name_dict[key] = name_dict[key] / total_sum
             print(name_dict)
+            counter_dict.append(name_dict)
 
         # update the list of names
-        names.append(name)
+        names.append(str(len(counter_dict)))
 
     # loop over the recognized faces
     for ((top, right, bottom, left), name) in zip(boxes, names):
@@ -76,7 +81,7 @@ def recognise_faces(encoding_file, image, detection_method="hog"):
     cv2.imwrite("static/images/temp.jpg", image)
     with open("static/images/temp.jpg", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
-    return encoded_string
+    return encoded_string, counter_dict
 
     # jpg_as_text = base64.b64encode(b)
     # return jpg_as_text
