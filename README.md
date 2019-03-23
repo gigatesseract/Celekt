@@ -7,7 +7,8 @@ Uses deep metric learning instead of deep learning for face identificaton.
 
 1. create virtual env, install requirements
 2. Run flask server
-3. Run index.html
-4. Can recognise all faces mentioned in the dataset, in a wide variety of angles and backgrounds
+3. Execute index.html
 
-dataset accumulated using [my image scraping tool](https://github.com/gigatesseract/GImageScrape)
+dataset accumulated using my [image scraping tool](https://github.com/gigatesseract/GImageScrape)
+
+###### Can recognise 1091 ceberities, trained on 22673 images. (Names are given in known_celebrities.txt)
