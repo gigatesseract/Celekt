@@ -29,13 +29,14 @@ In case of a video, a JSON string indicating the result is returned.
 
 `GET /recogniseFaces` (Returns the latest saved image/video)  
 params::  
-`"image"` : If image parameter is set, then the latest processed video is returned.  
+`"image"` : If image parameter is set, then the latest processed image is returned.  
 `"video"` : If video parameter is set, then the latest processed video is returned.
 
 (Note): If both parameters are set, only the image is returned.
 This returns the processed image.(A label for each bounded box for each face. The descriptions of the label are returned through the post request).
 
 dataset accumulated using my [image scraping tool](https://github.com/gigatesseract/GImageScrape)  
-link to dataset: [](https://drive.google.com/open?id=1NpuNBH6FNwPTXpxxPZ-xbqh3YhowcbF5)
+link to dataset: [here](https://drive.google.com/open?id=1NpuNBH6FNwPTXpxxPZ-xbqh3YhowcbF5)  
+link to input/output files: [here](https://drive.google.com/open?id=1n7_gZiYdT1nfJMj-oUqMKrORQtMCle1v)
 
 ###### Can recognise 1091 ceberities, trained on 22673 images. (Names are given in known_celebrities.txt)
