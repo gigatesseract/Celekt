@@ -66,7 +66,7 @@ def recognise_faces(encoding_file, image, detection_method="hog"):
             counter_dict.append(name_dict)
 
         # update the list of names
-        names.append(str(len(counter_dict)))
+        names.append(str(len(counter_dict) - 1))
 
     # loop over the recognized faces
     for ((top, right, bottom, left), name) in zip(boxes, names):
@@ -79,9 +79,8 @@ def recognise_faces(encoding_file, image, detection_method="hog"):
 
     jpg, b = cv2.imencode(".jpg", image)
     cv2.imwrite("static/images/temp.jpg", image)
-    with open("static/images/temp.jpg", "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read())
-    return encoded_string, counter_dict
+    print("counter dict: ", counter_dict)
+    return counter_dict
 
     # jpg_as_text = base64.b64encode(b)
     # return jpg_as_text

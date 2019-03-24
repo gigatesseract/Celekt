@@ -56,6 +56,7 @@ $(function() {
 
     var form_data = new FormData($("#image-form")[0]);
     form_data.append("download", $("#download").is(":checked"));
+    form_data.append("image", true);
     // console.log("formdata? ", fd);
     $.ajax({
       url: "http://127.0.0.1:5000/recognise",
