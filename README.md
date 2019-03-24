@@ -27,8 +27,8 @@ Return values:
 In case of an image, a JSON string will likeliness of each face is returned.  
 In case of a video, a JSON string indicating the result is returned.
 
-`GET /recogniseFaces` (Returns the latest saved image/video)
-params::
+`GET /recogniseFaces` (Returns the latest saved image/video)  
+params::  
 `"image"` : If image parameter is set, then the latest processed video is returned.  
 `"video"` : If video parameter is set, then the latest processed video is returned.
 
