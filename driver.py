@@ -16,6 +16,7 @@ from werkzeug.utils import secure_filename
 import recognize_faces_video_file as rf
 from werkzeug.wrappers import Response
 import json
+import os
 
 
 app = Flask(__name__)
@@ -28,61 +29,62 @@ api = Api(app)
 
 
 class recData(Resource):
-    def post(self):
+    def post(self):  # processed the image/video, saves it and returns appropriate json
 
-        if "image" in request.form:
+        if "image" in request.files:
             image = request.files["image"]
-            dict = rec_image.recognise_faces("encodings2.pickle", image)
+            dict = rec_image.recognise_faces(
+                "encodings2.pickle", image, "static/output/images/temp.jpg"
+            )
             data = {}
             for (i, value) in enumerate(dict):
                 data[str(i)] = value
 
-            return Response(json.dumps(data), mimetype="application/json")
+            return jsonify(data)
 
-            if "download" in request.form:
-                # return send_file(
-                #     "static/images/temp.jpg", attachment_filename="faces.jpg"
-                # )
+        elif "video" in request.files:
+            f = request.files["video"]
+
+            f.save(secure_filename(f.filename))
+            rf.recognise_video(
+                "encodings2.pickle", f.filename, "static/output/videos/processed.mp4"
+            )
+            return jsonify(
+                {
+                    "result": "Video processed and saved successfully. Hit a get request to get it"
+                }
+            )
+
+    def get(self):
+        # returns the last saved file/image (appropriate get parameters required)
+        if "image" in request.args:
+            if os.path.isfile("static/output/images/temp.jpg"):
                 return make_response(
                     send_file(
                         "static/images/temp.jpg", attachment_filename="faces.jpg"
                     ),
                     200,
                 )
+            else:
+                return jsonify({"result": "No latest image found. Create one!"})
+        elif "video" in request.args:
 
-            # return (
-            #     send_from_directory(
-            #         "static/images/",
-            #         "temp.jpg",
-            #         as_attachment=True,
-            #         mimetype="image/jpg",
-            #         attachment_filename="temp.jpg",
-            #     ),
-            # )
-            # return response
-        elif "video" in request.form:
-            f = request.files["video"]
-            f.save(secure_filename(f.filename))
-            rf.recognise_video(
-                "encodings2.pickle", f.filename, "static/images/" + f.filename
-            )
-
-            return make_response(
-                send_file(
-                    "static/images/" + f.filename, attachment_filename="video.mp4"
+            if os.path.isfile("static/output/videos/processed.mp4"):
+                return make_response(
+                    send_file(
+                        "static/output/videos/processed.mp4",
+                        attachment_filename="processed.mp4",
+                    ),
+                    200,
                 )
-            )
+
+            else:
+                return jsonify({"result": "No latest video found. Create one!"})
+        else:
+            return jsonify({"result": "Request either an audio or video"})
 
 
-class sendData(Resource):
-    def get(self):
-        return make_response(
-            send_file("static/images/temp.jpg", attachment_filename="faces.jpg"), 200
-        )
-
-
-api.add_resource(recData, "/recogniseData")
-api.add_resource(sendData, "/sendData")
+api.add_resource(recData, "/recogniseFaces")
 
 
 if __name__ == "__main__":

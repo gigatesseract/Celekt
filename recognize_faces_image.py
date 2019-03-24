@@ -9,7 +9,7 @@ import base64
 from collections import Counter
 
 
-def recognise_faces(encoding_file, image, detection_method="hog"):
+def recognise_faces(encoding_file, image, output_path, detection_method="hog"):
     npimg = numpy.fromfile(image, numpy.uint8)
     image = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
 
@@ -78,7 +78,7 @@ def recognise_faces(encoding_file, image, detection_method="hog"):
         )
 
     jpg, b = cv2.imencode(".jpg", image)
-    cv2.imwrite("static/images/temp.jpg", image)
+    cv2.imwrite(output_path, image)
     print("counter dict: ", counter_dict)
     return counter_dict
 

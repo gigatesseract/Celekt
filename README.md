@@ -11,22 +11,31 @@ Uses deep metric learning instead of deep learning for face identificaton.
 
 ### Route descriptions
 
-`POST /recogniseData` (Set form type to be form-data)
+`POST /recogniseFaces` (Set form type to be form-data)
 
 ```
-"image" : "True" (Or any string. This acts as a flag for the image identification algorithm)
-"image"(this is a file) : (The_file)
+"image": (The_file)    [Choose 'file' in the drop down that appears besides the key input field]
 ```
 
-Note, in case of a video, replace the keys by "video" and attach a sutable video
+```
+"video": (The_video_file)   [Attach the video file]
+```
+
+(Note): If both parameters are set, only the image is processed.
 
 Return values:  
 In case of an image, a JSON string will likeliness of each face is returned.  
-In case of a video, the processed video is returned.
+In case of a video, a JSON string indicating the result is returned.
 
-`GET /sendFile`  
-This returns the processed image.(A label for each bounded box for each face. The descriptions of the label are returned through the above post request) Call this route after posting an image through `/redData`
+`GET /recogniseFaces` (Returns the latest saved image/video)
+params::
+`"image"` : If image parameter is set, then the latest processed video is returned.  
+`"video"` : If video parameter is set, then the latest processed video is returned.
 
-dataset accumulated using my [image scraping tool](https://github.com/gigatesseract/GImageScrape)
+(Note): If both parameters are set, only the image is returned.
+This returns the processed image.(A label for each bounded box for each face. The descriptions of the label are returned through the post request).
+
+dataset accumulated using my [image scraping tool](https://github.com/gigatesseract/GImageScrape)  
+link to dataset: [](https://drive.google.com/open?id=1NpuNBH6FNwPTXpxxPZ-xbqh3YhowcbF5)
 
 ###### Can recognise 1091 ceberities, trained on 22673 images. (Names are given in known_celebrities.txt)
