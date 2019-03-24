@@ -11,7 +11,7 @@ Uses deep metric learning instead of deep learning for face identificaton.
 
 ### Route descriptions
 
-`POST /recData` (Set form type to be form-data)
+`POST /recogniseData` (Set form type to be form-data)
 
 ```
 "image" : "True" (Or any string. This acts as a flag for the image identification algorithm)
