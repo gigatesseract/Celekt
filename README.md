@@ -1,6 +1,6 @@
 # Celekt
 
-Open source alternative to Poor Man's Rekognition offered by AWS. Currently, can identify a small subset (21) of celebrity faces in a picture.  
+Open source alternative to Poor Man's Rekognition offered by AWS. Currently, can identify 1091 clebrity faces.  
 Uses deep metric learning instead of deep learning for face identificaton.
 
 ## Quick setup
@@ -25,7 +25,7 @@ In case of an image, a JSON string will likeliness of each face is returned.
 In case of a video, the processed video is returned.
 
 `GET /sendFile`  
-This returns the processed image. Call this route after posting an image through `/redData`
+This returns the processed image.(A label for each bounded box for each face. The descriptions of the label are returned through the above post request) Call this route after posting an image through `/redData`
 
 dataset accumulated using my [image scraping tool](https://github.com/gigatesseract/GImageScrape)
 
