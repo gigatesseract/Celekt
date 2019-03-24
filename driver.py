@@ -28,6 +28,17 @@ CORS(
 api = Api(app)
 
 
+if not os.path.exists("static/output"):
+    os.makedirs("static/output")
+
+if not os.path.exists("static/output/images"):
+    os.makedirs("static/output/images")
+
+
+if not os.path.exists("static/output/videos"):
+    os.makedirs("static/output/videos")
+
+
 class recData(Resource):
     def post(self):  # processed the image/video, saves it and returns appropriate json
 
