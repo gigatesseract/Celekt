@@ -60,12 +60,13 @@ params::
 `"name" : (A String that has underscores instead of spaces and all small)`  
  (This is the name that you want the model to understand, as the person in the pic)
 
-(Note): Make sure you get the names of all people first before using this route. That will help you fine tune already existing celebrity faces.The model will predict with less confidence next time. The more images you give of a single person, the more the confidence turns in your favour.
+(Note): Make sure you get the names of all people first before using the get route. That will help you fine tune already existing celebrity faces.  
+The model will predict with less confidence next time. The more images you give of a single person, the more the confidence turns in your favour.
 
 Return value: A JSON string indicating success or failure
 
-dataset accumulated using my [image scraping tool](https://github.com/gigatesseract/GImageScrape)
-link to dataset: [here](https://drive.google.com/open?id=1NpuNBH6FNwPTXpxxPZ-xbqh3YhowcbF5)
+dataset accumulated using my [image scraping tool](https://github.com/gigatesseract/GImageScrape)  
+link to dataset: [here](https://drive.google.com/open?id=1NpuNBH6FNwPTXpxxPZ-xbqh3YhowcbF5)  
 link to input/output files: [here](https://drive.google.com/open?id=1n7_gZiYdT1nfJMj-oUqMKrORQtMCle1v)
 
 ###### Can recognise 1081 ceberities, trained on 21592 images. (Names are given in known_celebrities.txt)
