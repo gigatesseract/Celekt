@@ -49,7 +49,28 @@ def encode(dataset_path, encoding_file, detection_method="hog"):
     f.close()
 
 
+def feedback(encoding_file, image_path, name, detection_method="hog"):
+    data = pickle.loads(open(encoding_file, "rb").read())
+    image = cv2.imread(image_path)
+    rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    boxes = face_recognition.face_locations(rgb, model=detection_method)
+    encodings = face_recognition.face_encodings(rgb, boxes)
+
+    knownEncodings = data["encodings"]
+    knownNames = data["names"]
+    for encoding in encodings:
+        # add each encoding + name to our set of known names and
+        # encodings
+        knownEncodings.append(encoding)
+        knownNames.append(name)
+
+    f = open(encoding_file, "wb")
+    data = {"encodings": knownEncodings, "names": knownNames}
+    f.write(pickle.dumps(data))
+    print("pickle file modified successfully")
+
+
 if __name__ == "__main__":
-    filename = "encodings2.pickle"
+    filename = "enc123.pickle"
     encode("dataset/", filename)
 

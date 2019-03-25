@@ -94,6 +94,7 @@ def recognise_video(
         # if the video writer is None *AND* we are supposed to write
         # the output video to disk initialize the writer
         if writer is None and output_path is not None:
+            print("writing frame at " + output_path)
             fourcc = cv2.VideoWriter_fourcc(*"DIVX")
             writer = cv2.VideoWriter(
                 output_path, fourcc, 24, (frame.shape[1], frame.shape[0]), True
@@ -103,7 +104,7 @@ def recognise_video(
         # faces t odisk
 
         if writer is not None:
-            print("writing frame at" + output_path)
+
             writer.write(frame)
 
         # check to see if we are supposed to display the output frame to

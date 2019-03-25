@@ -50,7 +50,7 @@ def recognise_faces(encoding_file, image, output_path, detection_method="hog"):
                 name = data["names"][i]
                 names_dict[name] += 1
                 counts[name] = counts.get(name, 0) + 1
-                print(name)
+                # print(name)
 
             # determine the recognized face with the largest number of
             # votes (note: in the event of an unlikely tie Python will
@@ -62,7 +62,7 @@ def recognise_faces(encoding_file, image, output_path, detection_method="hog"):
             total_sum = sum(name_dict.values())
             for key in name_dict:
                 name_dict[key] = name_dict[key] / total_sum
-            print(name_dict)
+            # print(name_dict)
             counter_dict.append(name_dict)
 
         # update the list of names
@@ -79,7 +79,7 @@ def recognise_faces(encoding_file, image, output_path, detection_method="hog"):
 
     jpg, b = cv2.imencode(".jpg", image)
     cv2.imwrite(output_path, image)
-    print("counter dict: ", counter_dict)
+    # print("counter dict: ", counter_dict)
     return counter_dict
 
     # jpg_as_text = base64.b64encode(b)

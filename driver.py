@@ -17,6 +17,7 @@ import recognize_faces_video_file as rf
 from werkzeug.wrappers import Response
 import json
 import os
+import pickle
 
 
 app = Flask(__name__)
@@ -51,7 +52,12 @@ class recData(Resource):
             for (i, value) in enumerate(dict):
                 data[str(i)] = value
 
-            return jsonify(data)
+            return jsonify(
+                {
+                    "success": "image saved successfully. Hit a get request to get it",
+                    "likeliness": data,
+                }
+            )
 
         elif "video" in request.files:
             f = request.files["video"]
@@ -62,7 +68,7 @@ class recData(Resource):
             )
             return jsonify(
                 {
-                    "result": "Video processed and saved successfully. Hit a get request to get it"
+                    "success": "Video processed and saved successfully. Hit a get request to get it"
                 }
             )
 
@@ -72,12 +78,12 @@ class recData(Resource):
             if os.path.isfile("static/output/images/temp.jpg"):
                 return make_response(
                     send_file(
-                        "static/images/temp.jpg", attachment_filename="faces.jpg"
+                        "static/output/images/temp.jpg", attachment_filename="faces.jpg"
                     ),
                     200,
                 )
             else:
-                return jsonify({"result": "No latest image found. Create one!"})
+                return jsonify({"error": "No latest image found. Create one!"})
         elif "video" in request.args:
 
             if os.path.isfile("static/output/videos/processed.mp4"):
@@ -90,13 +96,45 @@ class recData(Resource):
                 )
 
             else:
-                return jsonify({"result": "No latest video found. Create one!"})
+                return jsonify({"error": "No latest video found. Create one!"})
         else:
-            return jsonify({"result": "Request either an audio or video"})
+            return jsonify({"error": "Request either an audio or video"})
+
+
+class feedBack(Resource):
+    def post(self):
+        # gets an image and its corresponsing label and adds it to encodings
+        if "image" not in request.files:
+            return jsonify({"error": "Supply an 'image' file and a 'name'"})
+
+        if "name" not in request.form:
+            return jsonify(
+                {
+                    "name_error": "Enter a valid name. A valid name has underscores nstead of spaces. Make sure you get the list of all celebrities so there isn't two names for the single person."
+                }
+            )
+        else:
+            name = request.form["name"]
+            image = request.files["image"]
+            image.save(secure_filename(image.filename))
+            encode_faces.feedback("enncodings2.pickle", image.filename, name)
+            return jsonify({"success": "name added successfully"})
+
+
+class listNames(Resource):
+    # lists all names of known celebrities
+
+    def get(self):
+
+        data = pickle.loads(open("encodings2.pickle", "rb").read())
+        names = list(set(data["names"]))
+        return jsonify({"success": "Names received successfully", "names": names})
 
 
 api.add_resource(recData, "/recogniseFaces")
+api.add_resource(feedBack, "/feedback")
+api.add_resource(listNames, "/names")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=8765)

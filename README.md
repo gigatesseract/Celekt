@@ -39,4 +39,4 @@ dataset accumulated using my [image scraping tool](https://github.com/gigatesser
 link to dataset: [here](https://drive.google.com/open?id=1NpuNBH6FNwPTXpxxPZ-xbqh3YhowcbF5)  
 link to input/output files: [here](https://drive.google.com/open?id=1n7_gZiYdT1nfJMj-oUqMKrORQtMCle1v)
 
-###### Can recognise 1091 ceberities, trained on 22673 images. (Names are given in known_celebrities.txt)
+###### Can recognise 1081 ceberities, trained on 21592 images. (Names are given in known_celebrities.txt)
