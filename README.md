@@ -71,4 +71,4 @@ link to input/output files: [here](https://drive.google.com/open?id=1n7_gZiYdT1n
 
 ###### Can recognise 1081 ceberities, trained on 21592 images. (Names are given in known_celebrities.txt)
 
-Have fun! :smiley: :smiley: :smiley:
+Have fun! :smiley: :smiley: :smiley

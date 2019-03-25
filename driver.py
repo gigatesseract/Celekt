@@ -131,6 +131,11 @@ class listNames(Resource):
         return jsonify({"success": "Names received successfully", "names": names})
 
 
+@app.route("/")
+def root():
+    return render_template("index.html")
+
+
 api.add_resource(recData, "/recogniseFaces")
 api.add_resource(feedBack, "/feedback")
 api.add_resource(listNames, "/names")
