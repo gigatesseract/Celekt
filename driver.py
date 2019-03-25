@@ -117,7 +117,7 @@ class feedBack(Resource):
             name = request.form["name"]
             image = request.files["image"]
             image.save(secure_filename(image.filename))
-            encode_faces.feedback("enncodings2.pickle", image.filename, name)
+            encode_faces.feedback("encodings2.pickle", image.filename, name)
             return jsonify({"success": "name added successfully"})
 
 
