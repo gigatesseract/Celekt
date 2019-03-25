@@ -57,7 +57,10 @@ POST /feedback
 params::
 
 `"image" : (The_image_file)` [Choose 'file' in the drop down that appears besides the key input field. Put body type to be Form-data]  
-`"name" : (A String that has underscores instead of spaces and all small)` [This is the name that you want the model to understand, as the person in the pic](Note): Make sure you get the names of all people first before using this route. That will help you fine tune already existing celebrity faces.The model will predict with less confidence next time. The more images you give of a single person, the more the confidence turns in your favour.
+`"name" : (A String that has underscores instead of spaces and all small)`  
+ (This is the name that you want the model to understand, as the person in the pic)
+
+(Note): Make sure you get the names of all people first before using this route. That will help you fine tune already existing celebrity faces.The model will predict with less confidence next time. The more images you give of a single person, the more the confidence turns in your favour.
 
 Return value: A JSON string indicating success or failure
 
