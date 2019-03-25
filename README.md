@@ -1,6 +1,6 @@
 # Poor man's Rekognition
 
-Open source alternative to Amazon Rekognition offered by AWS. Currently, can identify 1091 clebrity faces.  
+Open source alternative to Amazon Rekognition offered by AWS. Currently, can identify 1081 clebrity faces.  
 Uses deep metric learning instead of deep learning for face identificaton.
 
 ## Quick setup
