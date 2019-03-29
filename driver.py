@@ -59,12 +59,14 @@ class recData(Resource):
             )
 
         elif "video" in request.files:
-            print("else statmetn")
+            print("else statment")
             f = request.files["video"]
 
             f.save(secure_filename(f.filename))
             rec_image.recognise_video(
-                app.encoding_file, f.filename, "static/output/videos/processed.mp4"
+                app.encoding_file,
+                f.filename,
+                "poormanrekog/static/output/videos/processed.mp4",
             )
 
             return jsonify(
