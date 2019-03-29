@@ -34,6 +34,7 @@
                     <li><a href="#image-descri">Image</a></li>
                     <li><a href="#video-descri">Video</a></li>
                     <li><a href="#feedback">Feedback</a></li>
+                    <li><a href="#similarity">Similarity</a></li>
                     <li><a href="#names">Names</a></li>
                 </ul>
                 
@@ -165,7 +166,7 @@
                 class="d-inline"
                 id="fimage"
                 aria-describedby="image"
-                name="video"
+                name="image"
                 required
               />
             </div>
@@ -187,6 +188,44 @@
       </div>
     </div>
     <hr />
+    <div class = "similarity" id="similarity">
+        <div class="para" >
+          <p class="para-heading">Similarity</p>
+          Compare two faces to see how similar they are.
+          <form
+          method="POST"
+          action="javascript:void(null);"
+          enctype="multipart/form-data"
+          id="similarity-form"
+          class="form-inline"
+        >
+          <div class="form-group">
+            <input
+              type="file"
+              class="d-inline"
+              id="simage1"
+              aria-describedby="image"
+              name="image1"
+              required
+            />
+          </div>
+          <div class="form-group">
+            
+            <input
+              type="file"
+              class="d-inline"
+              id="sname2"
+              name="image2"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Check similarity</button>
+        </form>
+        <div class="similarity-result" id="similarity-result"></div>
+        </div>
+      </div>
+      <hr>
     <div class="names" id="names">
       <div class="para">
         <p class="para-heading">List of all celebrities</p>
@@ -202,5 +241,7 @@
           <div class="name-result" id="name-result"></div>
           </div>
     </div>
+    <hr>
+   
   </body>
 </html>

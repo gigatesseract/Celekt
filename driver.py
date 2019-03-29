@@ -92,6 +92,7 @@ class recData(Resource):
 
 class feedBack(Resource):
     def post(self):
+
         # gets an image and its corresponsing label and adds it to encodings
         if "image" not in request.files:
             return jsonify({"error": "Supply an 'image' file and a 'name'"})
@@ -105,7 +106,6 @@ class feedBack(Resource):
         else:
             name = request.form["name"]
             image = request.files["image"]
-
             encode_faces.feedback(app.encoding_file, image, name)
             return jsonify({"success": "name added successfully"})
 
@@ -117,7 +117,23 @@ class listNames(Resource):
 
         data = pickle.loads(open(app.encoding_file, "rb").read())
         names = list(set(data["names"]))
+        print(len(names))
         return jsonify({"success": "Names received successfully", "names": names})
+
+
+class findSimilarity(Resource):
+    def post(self):
+        if "image1" not in request.files or "image2" not in request.files:
+            return jsonify(
+                {
+                    "error": "Send two images with keys 'image1' and 'image2' respectively"
+                }
+            )
+        else:
+            img1 = request.files["image1"]
+            img2 = request.files["image2"]
+            sim = rec_image.similarity(img1, img2)
+            return jsonify({"similarity": sim})
 
 
 class root(Resource):
@@ -129,6 +145,7 @@ api.add_resource(recData, "/recogniseFaces")
 api.add_resource(feedBack, "/feedback")
 api.add_resource(listNames, "/names")
 api.add_resource(root, "/")
+api.add_resource(findSimilarity, "/similarity")
 
 
 if __name__ == "__main__":

@@ -127,3 +127,18 @@ def recognise_video(encoding_file, input_path, output_path, detection_method="ho
     if writer is not None:
         writer.release()
 
+
+def similarity(img1, img2, detection_method="hog"):
+    image1 = cv2.imdecode(numpy.fromfile(img1, numpy.uint8), cv2.IMREAD_COLOR)
+    rgb = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
+    boxes = face_recognition.face_locations(rgb, model=detection_method)
+    encodings_1 = face_recognition.face_encodings(rgb, boxes)
+
+    image2 = cv2.imdecode(numpy.fromfile(img2, numpy.uint8), cv2.IMREAD_COLOR)
+    rgb = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
+    boxes = face_recognition.face_locations(rgb, model=detection_method)
+    encodings_2 = face_recognition.face_encodings(rgb, boxes)
+
+    dist = face_recognition.face_distance(encodings_1, encodings_2[0])
+    return 1 - dist[0]
+

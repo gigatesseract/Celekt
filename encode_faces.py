@@ -37,9 +37,9 @@ def feedback(encoding_file, image, name, detection_method="hog"):
     rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     boxes = face_recognition.face_locations(rgb, model=detection_method)
     encodings_new = face_recognition.face_encodings(rgb, boxes)
-
     encodings = encoded_data["encodings"]
     names = encoded_data["names"]
+
     for encoding in encodings_new:
 
         encodings.append(encoding)

@@ -163,17 +163,21 @@ $(function() {
     console.log("feed.....");
     e.preventDefault();
     e.stopPropagation();
-    var form_data = new FormData($("#video-form")[0]);
+    var form_data = new FormData($("#feed-form")[0]);
+
     form_data.append("name", $("#fname").val());
+    for (var key of form_data.keys()) console.log(key);
+    for (var value of form_data.values()) console.log(value);
     console.log("submitted");
     $.ajax({
-      url: "https://spider.nitt.edu/poormanrekog/feedback",
+      url: "http://127.0.0.1:8765/feedback",
       type: "POST",
       processData: false,
       contentType: false,
       data: form_data,
       cache: false,
       success: function(result) {
+        console.log(result);
         $("#feed-result").text("Successfully tuned");
       },
       error: function(error) {
@@ -190,8 +194,9 @@ $(function() {
     // var form_data = new FormData($("#video-form")[0]);
     // form_data.append("name", $("#fname").val());
     console.log("submitted");
+    var d = new Date();
     $.ajax({
-      url: "https://spider.nitt.edu/poormanrekog/names",
+      url: "https://spider.nitt.edu/poormanrekog/names?" + d.getTime(),
       type: "GET",
       processData: false,
       contentType: false,
@@ -205,6 +210,34 @@ $(function() {
         name_string += "</ol>";
         // console.log(name_string);
         $("#name-result").html(name_string);
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+
+    return false;
+  });
+
+  $("#similarity-form").submit(function(e) {
+    console.log("simm.....");
+    e.preventDefault();
+    e.stopPropagation();
+    var form_data = new FormData($("#similarity-form")[0]);
+
+    for (var key of form_data.keys()) console.log(key);
+    for (var value of form_data.values()) console.log(value);
+    console.log("submitted");
+    $.ajax({
+      url: "http://127.0.0.1:8765/similarity",
+      type: "POST",
+      processData: false,
+      contentType: false,
+      data: form_data,
+      cache: false,
+      success: function(result) {
+        console.log(result);
+        $("#similarity-result").text("Similarity: " + result.similarity);
       },
       error: function(error) {
         console.log(error);
