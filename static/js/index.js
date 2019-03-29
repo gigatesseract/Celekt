@@ -229,7 +229,7 @@ $(function() {
     for (var value of form_data.values()) console.log(value);
     console.log("submitted");
     $.ajax({
-      url: "http://spider.nitt.edu/similarity",
+      url: "http://spider.nitt.edu/poormanrekog/similarity",
       type: "POST",
       processData: false,
       contentType: false,
