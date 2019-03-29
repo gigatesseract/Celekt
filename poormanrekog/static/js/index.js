@@ -41,7 +41,7 @@ $(function() {
     form_data.append("image", true);
     console.log("submitted");
     $.ajax({
-      url: "http://127.0.0.1:8765/recogniseFaces",
+      url: "https://spider.nitt.edu/poormanrekog/recogniseFaces",
       type: "POST",
       processData: false,
       contentType: false,
