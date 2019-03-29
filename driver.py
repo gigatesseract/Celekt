@@ -52,6 +52,7 @@ class recData(Resource):
 
             return jsonify(
                 {
+                    data: form_data,
                     "success": "image processed successfully.",
                     "likeliness": dict,
                     "coordinates": coordinates,
@@ -64,9 +65,7 @@ class recData(Resource):
 
             f.save(secure_filename(f.filename))
             rec_image.recognise_video(
-                app.encoding_file,
-                f.filename,
-                "poormanrekog/static/output/videos/processed.mp4",
+                app.encoding_file, f.filename, "static/output/videos/processed.mp4"
             )
 
             return jsonify(
@@ -78,6 +77,8 @@ class recData(Resource):
     def get(self):
         # returns the last saved video
         if os.path.isfile("static/output/videos/processed.mp4"):
+            # g = wrap_file("static/output/videos/processed.mp4")
+            # return Response(g, direct_passthrough=True)
             return make_response(
                 send_file(
                     "static/output/videos/processed.mp4",
