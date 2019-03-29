@@ -229,7 +229,7 @@ $(function() {
     for (var value of form_data.values()) console.log(value);
     console.log("submitted");
     $.ajax({
-      url: "http://127.0.0.1:8765/similarity",
+      url: "http://spider.nitt.edu/similarity",
       type: "POST",
       processData: false,
       contentType: false,
