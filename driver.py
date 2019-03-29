@@ -9,11 +9,10 @@ from flask import (
 from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
 from flask_restful.utils import cors
-import recognize_faces_image as rec_image
+import recognize_faces as rec_image
 from flask import request
 import encode_faces
 from werkzeug.utils import secure_filename
-import recognize_faces_video_file as rf
 from werkzeug.wrappers import Response
 import json
 import os
@@ -27,6 +26,7 @@ CORS(
     allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
 )
 api = Api(app)
+app.encoding_file = "encodings2.pickle"
 
 
 if not os.path.exists("static/output"):
@@ -41,31 +41,32 @@ if not os.path.exists("static/output/videos"):
 
 
 class recData(Resource):
-    def post(self):  # processed the image/video, saves it and returns appropriate json
+    def post(self):  # processed the image/video and returns appropriate json
 
         if "image" in request.files:
             image = request.files["image"]
-            dict = rec_image.recognise_faces(
-                "encodings2.pickle", image, "static/output/images/temp.jpg"
-            )
+            coordinates, dict = rec_image.recognise_faces(app.encoding_file, image)
             data = {}
             for (i, value) in enumerate(dict):
                 data[str(i)] = value
 
             return jsonify(
                 {
-                    "success": "image saved successfully. Hit a get request to get it",
-                    "likeliness": data,
+                    "success": "image processed successfully.",
+                    "likeliness": dict,
+                    "coordinates": coordinates,
                 }
             )
 
         elif "video" in request.files:
+            print("else statmetn")
             f = request.files["video"]
 
             f.save(secure_filename(f.filename))
-            rf.recognise_video(
-                "encodings2.pickle", f.filename, "static/output/videos/processed.mp4"
+            rec_image.recognise_video(
+                app.encoding_file, f.filename, "static/output/videos/processed.mp4"
             )
+
             return jsonify(
                 {
                     "success": "Video processed and saved successfully. Hit a get request to get it"
@@ -73,32 +74,18 @@ class recData(Resource):
             )
 
     def get(self):
-        # returns the last saved file/image (appropriate get parameters required)
-        if "image" in request.args:
-            if os.path.isfile("static/output/images/temp.jpg"):
-                return make_response(
-                    send_file(
-                        "static/output/images/temp.jpg", attachment_filename="faces.jpg"
-                    ),
-                    200,
-                )
-            else:
-                return jsonify({"error": "No latest image found. Create one!"})
-        elif "video" in request.args:
+        # returns the last saved video
+        if os.path.isfile("static/output/videos/processed.mp4"):
+            return make_response(
+                send_file(
+                    "static/output/videos/processed.mp4",
+                    attachment_filename="processed.mp4",
+                ),
+                200,
+            )
 
-            if os.path.isfile("static/output/videos/processed.mp4"):
-                return make_response(
-                    send_file(
-                        "static/output/videos/processed.mp4",
-                        attachment_filename="processed.mp4",
-                    ),
-                    200,
-                )
-
-            else:
-                return jsonify({"error": "No latest video found. Create one!"})
         else:
-            return jsonify({"error": "Request either an audio or video"})
+            return jsonify({"error": "No latest video found. Create one!"})
 
 
 class feedBack(Resource):
@@ -110,14 +97,14 @@ class feedBack(Resource):
         if "name" not in request.form:
             return jsonify(
                 {
-                    "name_error": "Enter a valid name. A valid name has underscores nstead of spaces. Make sure you get the list of all celebrities so there isn't two names for the single person."
+                    "name_error": "Enter a valid name. A valid name has underscores instead of spaces. Make sure you get the list of all celebrities so there isn't two names for the single person."
                 }
             )
         else:
             name = request.form["name"]
             image = request.files["image"]
-            image.save(secure_filename(image.filename))
-            encode_faces.feedback("encodings2.pickle", image.filename, name)
+
+            encode_faces.feedback(app.encoding_file, image, name)
             return jsonify({"success": "name added successfully"})
 
 
@@ -126,20 +113,21 @@ class listNames(Resource):
 
     def get(self):
 
-        data = pickle.loads(open("encodings2.pickle", "rb").read())
+        data = pickle.loads(open(app.encoding_file, "rb").read())
         names = list(set(data["names"]))
         return jsonify({"success": "Names received successfully", "names": names})
 
 
-@app.route("/")
-def root():
-    return render_template("index.html")
+class root(Resource):
+    def get(self):
+        return make_response(send_file("templates/index.html"))
 
 
 api.add_resource(recData, "/recogniseFaces")
 api.add_resource(feedBack, "/feedback")
 api.add_resource(listNames, "/names")
+api.add_resource(root, "/")
 
 
 if __name__ == "__main__":
-    app.run(port=8765)
+    app.run(port=8765, debug=True)
