@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Poor Man's Rekog</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="../jquery.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="templates/index.js"></script>
+    <link rel="stylesheet" href="templates/index.css" />
+  </head>
+  <body>
+    <div>
+      <nav
+        class="navbar navbar-default navbar-fixed-top navbar-collapse navbar-toggler"
+      >
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Poor Man's Rekognition</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#about">About</a></li>
+            <li><a href="#image-descri">Image</a></li>
+            <!-- <li><a href="#video-descri">Video</a></li>
+            <li><a href="#">Feedback</a></li> -->
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <hr />
+    <div class="about" id="about">
+      <div class="para">
+        <p class="para-heading">About</p>
+        This is my proof of concept for the Poor Man's Rekognition Project for
+        GSOC'19. It can recognise 1081 celebrity faces. The model uses dlib's
+        frontal face detector and can detect front views of the face, using the
+        Histogram of Orineted Gradients (hog) detection method. The backend is
+        written in Flask.The model is capable of recognising faces in an image,
+        in a video and is capable of tuning its parameters for feedback.
+        <br /><br />
+        Source code:
+        <a href="https://github.com/gigatesseract/Celekt" target="_blank"
+          >here</a
+        >
+      </div>
+    </div>
+    <hr />
+    <div class="image-container" id="image-descri">
+      <div class="canvas">
+        <canvas id="imagecanvas" width="300" height="300">
+          > Your browser does not support the HTML5 canvas tag.
+        </canvas>
+      </div>
+      <div class="image-para">
+        <p class="para-heading">Image Recognition</p>
+
+        A post request that returns the coordinates of bounded box of each face,
+        and likeliness of celebrity-resemblance for each face in an image <br />
+
+        <div class="imageform">
+          <form
+            method="POST"
+            action="javascript:void(null);"
+            enctype="multipart/form-data"
+            id="image-form"
+            class="form-inline"
+          >
+            <div class="form-group">
+              <input
+                type="file"
+                class="d-inline"
+                id="image"
+                aria-describedby="image"
+                name="image"
+                onchange="readURL(this);"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="image-card-container">
+          <div class="image-likeliness" id="image-likeliness"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="video" id="video-descri">
+      <div class="para">
+        <p class="para-heading">Video recognition</p>
+        A POST request with a video. A processed video is returned. (Note: the
+        audio is stripped off. Processing takes time because the server isn't
+        powerful enough. (Can process 4-5 frames per second))
+        <br />
+        <div class="imageform">
+          <form
+            method="POST"
+            action="javascript:void(null);"
+            enctype="multipart/form-data"
+            id="video-form"
+            class="form-inline"
+          >
+            <div class="form-group">
+              <input
+                type="file"
+                class="d-inline"
+                id="image"
+                aria-describedby="image"
+                name="video"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

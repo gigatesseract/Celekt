@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Poor man's Rekog</title>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+
+  <body>
+  
+
+    <div class="heading">&nbsp;
+        <div class="aws">Poor Man's Rekognition</div>
+       
+     
+    </div>
+ 
+          <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Poor Man's Rekognition</a>
+          </div>
+      
+       
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Photo</a></li>
+              <li><a href="#">Video feed</a></li>
+            </ul>
+            </div>
+            </nav>
+            <div class="body">
+  
+
+            <div id="photo">      
+    <div class="main-container">
+      <div class="container">
+        <form
+          method="POST"
+          enctype="multipart/form-data"
+          id="image-form"
+          class="form-inline"
+        >
+          <div class="form-group">
+            <input
+              type="file"
+              onchange="readURL(this);"
+              class="d-inline"
+              id="image"
+              aria-describedby="image"
+              name="image"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a href="" class="d-inline" download="filename.jpg" id="download-link">Download</a>
+     
+        </form>
+        
+       
+      </div>
+
+      <div id="image-render" class="d-inline">
+        <img
+          id="image-render-before"
+          height="300"
+          width="400"
+          src="../images/preview.png"
+        />
+        <p>After FACE RECOG</p>
+        <img
+          id="image-render-after"
+          height="300"
+          width="400"
+          src="../images/preview.png"
+        />
+ 
+      </div>
+    </div>
+    </div>
+    <div id=video-feed>
+      <p>Under construciton</p>
+    </div>
+    </div>
+<script src="../../jquery.js"></script>
+<script src="../js/index.js"></script>
+  </body>
+</html>
