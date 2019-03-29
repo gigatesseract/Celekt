@@ -18,21 +18,29 @@
   </head>
   <body>
     <div>
-      <nav
-        class="navbar navbar-default navbar-fixed-top navbar-collapse navbar-toggler"
-      >
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Poor Man's Rekognition</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#about">About</a></li>
-            <li><a href="#image-descri">Image</a></li>
-            <!-- <li><a href="#video-descri">Video</a></li>
-            <li><a href="#">Feedback</a></li> -->
-          </ul>
-        </div>
-      </nav>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="#">Poor Man's Rekognition</a>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#about">About</a></li>
+                    <li><a href="#image-descri">Image</a></li>
+                    <li><a href="#video-descri">Video</a></li>
+                    <li><a href="#feedback">Feedback</a></li>
+                    <li><a href="#names">Names</a></li>
+                </ul>
+                
+              </div>
+            </div>
+          </nav>
+      
     </div>
 
     <hr />
@@ -99,7 +107,8 @@
         <p class="para-heading">Video recognition</p>
         A POST request with a video. A processed video is returned. (Note: the
         audio is stripped off. Processing takes time because the server isn't
-        powerful enough. (Can process 4-5 frames per second))
+        powerful enough. (Can process 4-5 frames per second)). GET processed
+        video after posting it
         <br />
         <div class="imageform">
           <form
@@ -116,13 +125,79 @@
                 id="image"
                 aria-describedby="image"
                 name="video"
+                required
               />
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
+          <button id="get-video" class="btn btn-primary">GET VIDEO</button>
+          <p id="video-place"></p>
+          <div class="video-player" id="video-player">
+            <video width="320" height="240" controls>
+              <source src="" type="video/mp4" />
+            </video>
+          </div>
         </div>
       </div>
+    </div>
+    <hr />
+    <div class="feedback" id=feedback>
+      <div class="para">
+        <p class="para-heading">Feedback</p>
+        Enter a name, and supply an image. (names must all be small and should
+        have underscores instead of spaces. eg. dwayne_johnson). The more images
+        you supply, the more the model will have confidence in that person.
+        <div class="imageform">
+          <form
+            method="POST"
+            action="javascript:void(null);"
+            enctype="multipart/form-data"
+            id="feed-form"
+            class="form-inline"
+          >
+            <div class="form-group">
+              <input
+                type="file"
+                class="d-inline"
+                id="fimage"
+                aria-describedby="image"
+                name="video"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                class="d-inline"
+                id="fname"
+                name="name"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <div id="feed-result"></div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="names" id="names">
+      <div class="para">
+        <p class="para-heading">List of all celebrities</p>
+        Run a sample GET request to get the list of all celebrity names that the
+        model can recognise.
+      
+      <div class="nameform">
+         
+
+            <button type="submit" class="btn btn-primary" id="get-names">GET names</button>
+            <button type="submit" class="btn btn-primary" id="clear">clear</button>
+          
+          <div class="name-result" id="name-result"></div>
+          </div>
     </div>
   </body>
 </html>

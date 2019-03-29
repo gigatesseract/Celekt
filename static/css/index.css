@@ -2,9 +2,11 @@ html,
 body {
   height: 100%;
   margin: 0;
-  min-width: 800px;
+  min-width: 400px;
 }
-
+button {
+  margin: 20px;
+}
 .heading {
   margin: 0;
 
@@ -108,4 +110,13 @@ nav {
 
 .canvas-wrapper {
   text-align: center;
+}
+
+.name-result {
+  /* border: 2px solid black; */
+  display: inline;
+  height: 20vh;
+  overflow: scroll;
+  background-color: cornsilk;
+  margin: 20px;
 }
