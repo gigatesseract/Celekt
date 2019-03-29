@@ -52,7 +52,6 @@ class recData(Resource):
 
             return jsonify(
                 {
-                    data: form_data,
                     "success": "image processed successfully.",
                     "likeliness": dict,
                     "coordinates": coordinates,
