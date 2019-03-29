@@ -30,7 +30,7 @@ def encode(dataset_path, encoding_file, detection_method="hog"):
     f.close()
 
 
-ajay_tirkeydef feedback(encoding_file, image, name, detection_method="hog"):
+def feedback(encoding_file, image, name, detection_method="hog"):
     # basically get the encoded file, append the encodings of given image and write it to the same file.
     encoded_data = pickle.loads(open(encoding_file, "rb").read())
     image = cv2.imdecode(numpy.fromfile(image, numpy.uint8), cv2.IMREAD_COLOR)
