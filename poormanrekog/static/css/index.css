@@ -2,7 +2,7 @@ html,
 body {
   height: 100%;
   margin: 0;
-  min-width: 400px;
+  min-width: 800px;
 }
 button {
   margin: 20px;
