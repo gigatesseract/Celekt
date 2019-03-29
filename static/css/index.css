@@ -1,62 +1,111 @@
-div {
-  justify-content: center;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  min-width: 800px;
 }
+
 .heading {
-  display: block;
+  margin: 0;
+
   height: 20vh;
-  background-color: lightyellow;
+  background-color: aqua;
+  width: 100%;
 }
-
-.container {
-  margin: 5vh auto;
+.navbar-default {
+  margin: 0 !important;
 }
-#image-render {
-  display: inline-block;
-  margin: 20px;
-  /* position: relative;
-  left: 20vw; */
-}
-.form-group {
-  display: inline-block;
-}
-
-.main-container {
+.para {
+  /* width: 100%; */
+  /* position: relative; */
+  font-weight: 400;
+  font-size: 20px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", "Geneva", "Verdana", "sans-serif";
+  background-color: lightgoldenrodyellow;
+  /* height: 20vh; */
+  padding: 80px;
   text-align: center;
 }
-p {
+
+.image-para {
+  font-weight: 400;
+  font-size: 20px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", "Geneva", "Verdana", "sans-serif";
+  background-color: lightgoldenrodyellow;
+  /* height: 20vh; */
+  padding: 80px;
+  text-align: center;
+  width: 60%;
   display: inline-block;
-  margin: 20px;
-  border: 2px dotted black;
-  border-radius: 5px;
-  padding: 20px;
-}
-body {
-  background-color: lightcyan;
-}
-#image-render-after {
-  margin: 30px;
-}
-#image-render-before {
-  margin: 30px;
-}
-.navbar-brand {
-  margin-right: 30px;
-}
-#navb {
-  background-color: bisque;
-}
-.aws {
-  color: coral;
-  font-size: 8vh;
-  font-weight: bold;
-  font-family: Helvetica;
-  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
-    0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
-    0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
-    0 20px 20px rgba(0, 0, 0, 0.15);
 }
 
-.aws {
+.para-heading {
+  position: relative;
+  top: -60px;
+  left: -60px;
+  font-size: 30px;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+pre code {
+  display: inline;
+}
+
+.imageform {
+  display: inline;
+  margin: 30px;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.canvas {
+  margin: auto;
+  display: inline-block;
+  height: parent;
+  width: 20%;
+  text-align: center;
+  background-color: lightgoldenrodyellow;
+}
+
+#imagecanvas {
+  background-color: transparent;
+
+  /* position: relative; */
+  /* bottom: 20vh; */
+  /* top: 2vh;
+  left: 2vw; */
+}
+
+.image-container {
+  display: flex;
+  text-align: center;
+  background-color: lightgoldenrodyellow;
+  /* display: inline-block; */
+}
+
+.card {
+  background-color: goldenrod;
+  border: 2px solid black;
+  display: inline-block;
+  margin: 10px;
+  padding: 20px;
+}
+.card-title {
+  text-decoration: underline;
+  font-family: "Courier New", "Courier", "monospace";
+}
+
+.image-card-container {
+  display: block;
+  text-align: center;
+}
+
+.canvas-wrapper {
   text-align: center;
 }
