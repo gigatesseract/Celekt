@@ -19,7 +19,7 @@ import os
 import pickle
 
 
-app = Flask(__name__, static_folder="static")
+app = Flask(__name__)
 CORS(
     app,
     support_credentials=True,
