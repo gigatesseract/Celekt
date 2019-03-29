@@ -4,70 +4,51 @@ import argparse
 import pickle
 import cv2
 import os
+import numpy
 
 
 def encode(dataset_path, encoding_file, detection_method="hog"):
 
-    # grab the paths to the input images in our dataset
-    print("[INFO] quantifying faces...")
     imagePaths = list(paths.list_images(dataset_path))
-    knownEncodings = []
-    knownNames = []
+    encodings = []
+    names = []
 
-    # loop over the image paths
     for (i, imagePath) in enumerate(imagePaths):
-        # extract the person name from the image path
-        if i % 2000 == 0:
-            print("[INFO] processing image {}/{}".format(i + 1, len(imagePaths)))
-        name = imagePath.split(os.path.sep)[-2]
 
-        # load the input image and convert it from RGB (OpenCV ordering)
-        # to dlib ordering (RGB)
+        name = imagePath.split(os.path.sep)[-2]
         image = cv2.imread(imagePath)
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
-        # detect the (x, y)-coordinates of the bounding boxes
-        # corresponding to each face in the input image
         boxes = face_recognition.face_locations(rgb, model=detection_method)
-
-        # compute the facial embedding for the face
         encodings = face_recognition.face_encodings(rgb, boxes)
-
-        # loop over the encodings
         for encoding in encodings:
-            # add each encoding + name to our set of known names and
-            # encodings
             knownEncodings.append(encoding)
             knownNames.append(name)
 
-    # dump the facial encodings + names to disk
-    print("[INFO] serializing encodings...")
-    data = {"encodings": knownEncodings, "names": knownNames}
+    encoded_data = {"encodings": encodings, "names": names}
     f = open(encoding_file, "wb")
-    f.write(pickle.dumps(data))
-    print("pickle file generated")
+    f.write(pickle.dumps(encoded_data))
     f.close()
 
 
-def feedback(encoding_file, image_path, name, detection_method="hog"):
-    data = pickle.loads(open(encoding_file, "rb").read())
-    image = cv2.imread(image_path)
+def feedback(encoding_file, image, name, detection_method="hog"):
+    # basically get the encoded file, append the encodings of given image and write it to the same file.
+    encoded_data = pickle.loads(open(encoding_file, "rb").read())
+    image = cv2.imdecode(numpy.fromfile(image, numpy.uint8), cv2.IMREAD_COLOR)
     rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     boxes = face_recognition.face_locations(rgb, model=detection_method)
     encodings = face_recognition.face_encodings(rgb, boxes)
 
-    knownEncodings = data["encodings"]
-    knownNames = data["names"]
+    encodings = encoded_data["encodings"]
+    names = encoded_data["names"]
     for encoding in encodings:
-        # add each encoding + name to our set of known names and
-        # encodings
-        knownEncodings.append(encoding)
-        knownNames.append(name)
+
+        encodings.append(encoding)
+        names.append(name)
 
     f = open(encoding_file, "wb")
-    data = {"encodings": knownEncodings, "names": knownNames}
+    data = {"encodings": encodings, "names": names}
     f.write(pickle.dumps(data))
-    print("pickle file modified successfully")
+    f.close()
 
 
 if __name__ == "__main__":
