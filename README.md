@@ -24,22 +24,15 @@ params::
 (Note): If both parameters are set, only the image is processed.
 
 Return values:  
-In case of an image, a JSON string will likeliness of each face is returned.  
+In case of an image, a JSON string will likeliness of each face, and the bounding box for each face are returned.  
 In case of a video, a JSON string indicating the result is returned.
 
 ```
 GET /recogniseFaces
 ```
 
-(Returns the latest saved image/video)  
-params::
-
-`"image"` : If image parameter is set, then the latest processed image is returned.  
- [OR]  
-`"video"` : If video parameter is set, then the latest processed video is returned.
-
-(Note): If both parameters are set, only the image is returned.
-This returns the processed image.(A label for each bounded box for each face. The descriptions of the label are returned through the post request).
+(Returns the latest saved video - as a resource)  
+(no params)
 
 ```
 GET  /names
