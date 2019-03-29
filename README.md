@@ -27,6 +27,24 @@ Return values:
 In case of an image, a JSON string will likeliness of each face, and the bounding box for each face are returned.  
 In case of a video, a JSON string indicating the result is returned.
 
+In case of an image:
+
+```
+"likeliness": [An array of names for each face],
+"coordinates":{"top": number,
+                "bottom": number,
+                "left": number,
+                "right":number}
+"success" : "image processed successfully"
+
+```
+
+In case of video:
+
+```
+"success": "Video processed and saved successfully. Hit a get request to get it"
+```
+
 ```
 GET /recogniseFaces
 ```
@@ -40,7 +58,13 @@ GET  /names
 
 (no params)
 
-Return values: A JSON string with the names of all celebrities that can be recognised
+Return values:
+
+```
+"success": "Names received successfully"
+"names": [Array of values]
+
+```
 
 ```
 POST /feedback
@@ -56,12 +80,18 @@ params::
 (Note): Make sure you get the names of all people first before using the get route. That will help you fine tune already existing celebrity faces.  
 The model will predict with less confidence next time. The more images you give of a single person, the more the confidence turns in your favour.
 
-Return value: A JSON string indicating success or failure
+Return value:
+
+```
+"success": "name added successfully"})
+
+
+```
 
 dataset accumulated using my [image scraping tool](https://github.com/gigatesseract/GImageScrape)  
 link to dataset: [here](https://drive.google.com/open?id=1NpuNBH6FNwPTXpxxPZ-xbqh3YhowcbF5)  
 link to input/output files: [here](https://drive.google.com/open?id=1n7_gZiYdT1nfJMj-oUqMKrORQtMCle1v)
 
-###### Can recognise 1081 ceberities, trained on 21592 images. (Names are given in known_celebrities.txt)
+###### Can recognise 1077 ceberities, trained on 21592 images. (Names are given in known_celebrities.txt)
 
-Have fun! :smiley: :smiley: :smiley
+Have fun! :smiley: :smiley: :smiley:
