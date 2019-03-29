@@ -38,7 +38,6 @@ $(function() {
     e.preventDefault();
     e.stopPropagation();
     var form_data = new FormData($("#image-form")[0]);
-    form_data.append("image", true);
     console.log("submitted");
     $.ajax({
       url: "https://spider.nitt.edu/poormanrekog/recogniseFaces",

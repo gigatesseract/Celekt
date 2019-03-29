@@ -30,17 +30,17 @@ def encode(dataset_path, encoding_file, detection_method="hog"):
     f.close()
 
 
-def feedback(encoding_file, image, name, detection_method="hog"):
+ajay_tirkeydef feedback(encoding_file, image, name, detection_method="hog"):
     # basically get the encoded file, append the encodings of given image and write it to the same file.
     encoded_data = pickle.loads(open(encoding_file, "rb").read())
     image = cv2.imdecode(numpy.fromfile(image, numpy.uint8), cv2.IMREAD_COLOR)
     rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     boxes = face_recognition.face_locations(rgb, model=detection_method)
-    encodings = face_recognition.face_encodings(rgb, boxes)
+    encodings_new = face_recognition.face_encodings(rgb, boxes)
 
     encodings = encoded_data["encodings"]
     names = encoded_data["names"]
-    for encoding in encodings:
+    for encoding in encodings_new:
 
         encodings.append(encoding)
         names.append(name)
