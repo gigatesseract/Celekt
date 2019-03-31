@@ -7,7 +7,7 @@ Uses deep metric learning instead of deep learning for face identificaton.
 
 1. create virtual env, install requirements
 2. Run flask server (`python driver.py`)
-3. This is a REST application. Fire up POSTMAN
+3. Go to root route
 
 ### Route descriptions
 
@@ -86,6 +86,29 @@ Return value:
 "success": "name added successfully"})
 
 
+```
+
+```
+POST /timeFaces
+```
+
+(Gives the presence of celebrities in seconds, whenever they are present)
+
+```
+"video": (The video file)
+```
+
+Return JSON:
+
+```
+{
+"processed":[
+  {"timestamp A to timestamp B": "name of celebrity},
+  {"timestamp C to timestamp D": "name of celebrity}....
+],
+  "success":"video processed successfully"
+
+}
 ```
 
 dataset accumulated using my [image scraping tool](https://github.com/gigatesseract/GImageScrape)  
