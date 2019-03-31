@@ -19,7 +19,7 @@ import os
 import pickle
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="poormanrekog")
 CORS(
     app,
     support_credentials=True,
@@ -136,6 +136,19 @@ class findSimilarity(Resource):
             return jsonify({"similarity": sim})
 
 
+class timeFaces(Resource):
+    def post(self):
+        # post request will return a json about which celebrity is there from which second to which second. Right now, it will return celebrity faces in every frame
+
+        if "video" not in request.files:
+            return jsonify({"error": "Send a video"})
+        else:
+            f = request.files["video"]
+            f.save(secure_filename(f.filename))
+            processed_json = rec_image.json_from_faces(app.encoding_file, f.filename)
+            return jsonify({"processed": processed_json})
+
+
 class root(Resource):
     def get(self):
         return make_response(send_file("templates/index.html"))
@@ -146,6 +159,7 @@ api.add_resource(feedBack, "/feedback")
 api.add_resource(listNames, "/names")
 api.add_resource(root, "/")
 api.add_resource(findSimilarity, "/similarity")
+api.add_resource(timeFaces, "/timeFaces")
 
 
 if __name__ == "__main__":
