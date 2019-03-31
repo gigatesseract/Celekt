@@ -66,6 +66,7 @@ class recData(Resource):
             rec_image.recognise_video(
                 app.encoding_file, f.filename, "static/output/videos/processed.mp4"
             )
+            os.remove(f.filename)
 
             return jsonify(
                 {
@@ -146,6 +147,8 @@ class timeFaces(Resource):
             f = request.files["video"]
             f.save(secure_filename(f.filename))
             processed_json = rec_image.json_from_faces(app.encoding_file, f.filename)
+            os.remove(f.filename)
+
             return jsonify(
                 {"processed": processed_json, "success": "video processed successfully"}
             )
