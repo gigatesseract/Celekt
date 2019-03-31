@@ -1,7 +1,7 @@
 var width, height;
 var base_production = "https://spider.nitt.edu/poormanrekog";
 var base_local = "http://127.0.0.1:8765";
-var base = base_local;
+var base = base_production;
 
 function readURL(input) {
   var c = document.getElementById("imagecanvas");
