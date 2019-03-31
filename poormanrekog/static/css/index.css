@@ -2,7 +2,7 @@ html,
 body {
   height: 100%;
   margin: 0;
-  min-width: 800px;
+  /* min-width: 00px; */
 }
 button {
   margin: 20px;
@@ -67,8 +67,8 @@ nav {
   width: 100%;
 }
 .canvas {
-  margin: auto;
-  display: inline-block;
+  margin: 20px;
+  display: inline;
   height: parent;
   width: 20%;
   text-align: center;
@@ -104,12 +104,13 @@ nav {
 }
 
 .image-card-container {
-  display: block;
+  display: inline;
   text-align: center;
 }
 
 .canvas-wrapper {
   text-align: center;
+  display: inline;
 }
 
 .name-result {
@@ -119,4 +120,8 @@ nav {
   overflow: scroll;
   background-color: cornsilk;
   margin: 20px;
+}
+
+.canvas-image-container {
+  display: inline-block;
 }

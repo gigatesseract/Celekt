@@ -13,8 +13,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- <script src="../jquery.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="/poormanrekog/static/js/index.js"></script>
-    <link rel="stylesheet" href="/poormanrekog/static/css/index.css" />
+    <script src="poormanrekog/static/js/index.js"></script>
+    <link rel="stylesheet" href="poormanrekog/static/css/index.css" />
   </head>
   <body>
     <div>
@@ -35,7 +35,9 @@
                     <li><a href="#video-descri">Video</a></li>
                     <li><a href="#feedback">Feedback</a></li>
                     <li><a href="#similarity">Similarity</a></li>
+                    <li><a href="#video-json">Timestamps in video</a></li>
                     <li><a href="#names">Names</a></li>
+                   
                 </ul>
                 
               </div>
@@ -62,16 +64,12 @@
         link to dataset: <a href = "https://drive.google.com/open?id=1NpuNBH6FNwPTXpxxPZ-xbqh3YhowcbF5" target = "_blank">here</a> <br> 
         link to input/output files: <a href= "https://drive.google.com/open?id=1n7_gZiYdT1nfJMj-oUqMKrORQtMCle1v" target = "_blank">here</a><br>
         The dataset was accumulated using my <a href="https://github.com/gigatesseract/GimageScrape" target = "_blank">image scraper tool</a> and hence is less in number (approx. 20/face) and is of low resolution.
-      </div>
+      
     </div>
     <hr />
-    <div class="image-container" id="image-descri">
-      <div class="canvas">
-        <canvas id="imagecanvas" width="300" height="300">
-          > Your browser does not support the HTML5 canvas tag.
-        </canvas>
-      </div>
-      <div class="image-para">
+    <div class="image-descri" id="image-descri">
+      
+      <div class="para">
         <p class="para-heading">Image Recognition</p>
 
         A post request that returns the coordinates of bounded box of each face,
@@ -99,10 +97,19 @@
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
+        <br>
+        <div class="canvas-result-container">
+        <div class="canvas">
+          <canvas id="imagecanvas" width="300" height="300">
+            > Your browser does not support the HTML5 canvas tag.
+          </canvas>
+        </div>
         <div class="image-card-container">
           <div class="image-likeliness" id="image-likeliness"></div>
         </div>
+        </div>
       </div>
+    </div>
     </div>
 
     <hr />
@@ -111,8 +118,8 @@
         <p class="para-heading">Video recognition</p>
         A POST request with a video. A processed video is returned. (Note: the
         audio is stripped off. Processing takes time because the server isn't
-        powerful enough. (Can process 4-5 frames per second)). GET processed
-        video after posting it
+        powerful enough. Takes 8 seconds for one second of 720p video). GET processed
+        video after posting it (returns mp4 video)
         <br />
         <div class="imageform">
           <form
@@ -121,6 +128,7 @@
             enctype="multipart/form-data"
             id="video-form"
             class="form-inline"
+            
           >
             <div class="form-group">
               <input
@@ -138,9 +146,7 @@
           <button id="get-video" class="btn btn-primary">GET VIDEO</button>
           <p id="video-place"></p>
           <div class="video-player" id="video-player">
-            <video width="320" height="240" controls>
-              <source src="" type="video/mp4" />
-            </video>
+            
           </div>
         </div>
       </div>
@@ -226,6 +232,39 @@
         </div>
       </div>
       <hr>
+    
+    <div class="video-json" id="video-json">
+      <div class="para">
+        <p class="para-heading">Timestamps in a video</p>
+        Send a video. The resulting JSON is dumped here. (Time in seconds: name of celebrity)
+        <form
+        method="POST"
+        action="javascript:void(null);"
+        enctype="multipart/form-data"
+        id="video-json-form"
+        class="form-inline"
+      >
+        <div class="form-group">
+          <input
+            type="file"
+            class="d-inline"
+            id="simage1"
+            aria-describedby="image"
+            name="video"
+            required
+          />
+        </div>
+      
+        
+
+        <button type="submit" class="btn btn-primary">Send video</button>
+        
+      </form>
+      <button class="btn btn-primary" id="clear-video">clear</button>
+        <div id="video-json-result"></div>
+
+      </div>
+    </div><hr>
     <div class="names" id="names">
       <div class="para">
         <p class="para-heading">List of all celebrities</p>
@@ -242,6 +281,7 @@
           </div>
     </div>
     <hr>
+
    
   </body>
 </html>

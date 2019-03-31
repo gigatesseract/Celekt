@@ -1,4 +1,7 @@
 var width, height;
+var base_production = "https://spider.nitt.edu/poormanrekog";
+var base_local = "http://127.0.0.1:8765";
+var base = base_local;
 
 function readURL(input) {
   var c = document.getElementById("imagecanvas");
@@ -40,7 +43,7 @@ $(function() {
     var form_data = new FormData($("#image-form")[0]);
     console.log("submitted");
     $.ajax({
-      url: "https://spider.nitt.edu/poormanrekog/recogniseFaces",
+      url: base + "/recogniseFaces",
       type: "POST",
       processData: false,
       contentType: false,
@@ -114,7 +117,7 @@ $(function() {
     var form_data = new FormData($("#video-form")[0]);
     console.log("submitted");
     $.ajax({
-      url: "https://spider.nitt.edu/poormanrekog/recogniseFaces",
+      url: base + "/recogniseFaces",
       type: "POST",
       processData: false,
       contentType: false,
@@ -134,7 +137,7 @@ $(function() {
     console.log("data?: data");
 
     jQuery.ajax({
-      url: "https://spider.nitt.edu/poormanrekog/recogniseFaces",
+      url: base + "/recogniseFaces",
       cache: false,
       type: "GET",
       processData: false,
@@ -168,7 +171,7 @@ $(function() {
     form_data.append("name", $("#fname").val());
     console.log("submitted");
     $.ajax({
-      url: "https://spider.nitt.edu/poormanrekog/feedback",
+      url: base + "/feedback",
       type: "POST",
       processData: false,
       contentType: false,
@@ -193,7 +196,7 @@ $(function() {
     console.log("submitted");
     var d = new Date();
     $.ajax({
-      url: "https://spider.nitt.edu/poormanrekog/names?" + d.getTime(),
+      url: base + "/names?" + d.getTime(),
       type: "GET",
       processData: false,
       contentType: false,
@@ -225,7 +228,7 @@ $(function() {
     for (var value of form_data.values()) console.log(value);
     console.log("submitted");
     $.ajax({
-      url: "https://spider.nitt.edu/poormanrekog/similarity",
+      url: base + "/similarity",
       type: "POST",
       processData: false,
       contentType: false,
@@ -242,7 +245,43 @@ $(function() {
 
     return false;
   });
+  $("#video-json-form").submit(function(e) {
+    console.log("simm.....");
+    e.preventDefault();
+    e.stopPropagation();
+    var form_data = new FormData($("#video-json-form")[0]);
+    $("#video-json-result").text("submitting");
+    for (var key of form_data.keys()) console.log(key);
+    for (var value of form_data.values()) console.log(value);
+    // console.log("submitted");
+    $.ajax({
+      url: base + "/timeFaces",
+      type: "POST",
+      processData: false,
+      contentType: false,
+      data: form_data,
+      cache: false,
+      success: function(result) {
+        console.log(result);
+        json_string = "<p>";
+        result.processed.forEach(ele => {
+          key = Object.keys(ele)[0];
+          json_string += key + ": " + ele[key] + "<br>";
+        });
+        json_string += "</p>";
+        $("#video-json-result").html(json_string);
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+
+    return false;
+  });
   $("#clear").on("click", function() {
     $("#name-result").text("");
+  });
+  $("#clear-video").on("click", function() {
+    $("#video-json-result").text("");
   });
 });
