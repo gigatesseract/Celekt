@@ -146,7 +146,9 @@ class timeFaces(Resource):
             f = request.files["video"]
             f.save(secure_filename(f.filename))
             processed_json = rec_image.json_from_faces(app.encoding_file, f.filename)
-            return jsonify({"processed": processed_json})
+            return jsonify(
+                {"processed": processed_json, "success": "video processed successfully"}
+            )
 
 
 class root(Resource):

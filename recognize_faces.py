@@ -185,15 +185,14 @@ def json_from_faces(encoding_file, input_path, detection_method="hog"):
     stream = cv2.VideoCapture(input_path)
     writer = None
     fps = stream.get(cv2.CAP_PROP_FPS)
-    print("FPS:??? ", fps)
+
     # start = time.time()
     count = 0
     # print(start)
     json_dict = {}
     while True:
         count += 1
-        if count % int(fps) == 0:
-            print("One more second has elapsed... ", count / int(fps))
+
         timestamp = count / fps
         (is_grabbed, frame) = stream.read()
         if not is_grabbed:
