@@ -2,8 +2,13 @@ html,
 body {
   height: 100%;
   margin: 0;
-  min-width: 30spurce emv/bin/acti0px;
+  min-width: 400px;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
 }
+
 button {
   margin: 20px;
 }
