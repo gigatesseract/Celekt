@@ -8,6 +8,7 @@ body {
   padding: 0px;
   overflow-x: hidden;
   overflow-y: scroll;
+  border: 1px solid transparent;
 }
 
 button {
